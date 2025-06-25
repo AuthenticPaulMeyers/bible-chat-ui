@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblia - Register</title>
+</head>
+<body>
+    <h1>Register</h1>
+    <form method="POST" id="registerForm" enctype="multipart/form-data">
+        <div>
+            <input type="text" id="username" name="username" required placeholder="Username"> <br><br>
+            <input type="email" id="email" name="email" required placeholder="Email"> <br><br>
+            <input type="password" id="password" name="password" required placeholder="Password"> <br><br>
+            <input type="file" id="image" name="image" required> <br><br>
+            <input type="submit" value="Register">
+            <p>Already a user? <a href="login.html">Login here.</a></p>
+        </div>
+
+    </form>
+
+    <script src="js/register.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bible Character</title>
+</head>
+<body>
+
+    <h1>Add Character</h1>
+    <form action="" method="post" autocomplete="off" id="addCharacterForm" enctype="multipart/form-data">
+        <input type="text" name="name" id="name" required placeholder="Character name"> <br><br>
+        <input type="text" name="description" id="description" required placeholder="Description"> <br><br>
+        <select name="book" id="book"> 
+            <option disabled selected>Select Book</option>
+            <option value="New Testament">New Testament</option>
+            <option value="Old Testament">Old Testament</option>
+        </select><br><br>
+        <input type="file" name="image" id="image" required> <br><br>
+        <button type="submit">Add character</button>
+    </form>
+    <script src="js/characters.js"></script>
+</body>
+</html>

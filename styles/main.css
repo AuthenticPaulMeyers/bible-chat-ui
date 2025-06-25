@@ -1,0 +1,43 @@
+/* default colors */
+*{
+    transition: .25s all;
+}
+:root{
+    --primary-purple: #6f47e4;
+    --secondary-purple: #9e75ff;
+    --white: #fafafa;
+    --shadows: #ecebfb;
+
+}
+
+.bg-white{
+    background-color: var(--white);
+}
+
+.primary{
+    color: var(--primary-purple);
+}
+.white{
+    color: var(--white);
+}
+
+.secondary{
+    color: var(--secondary-purple)
+}
+
+.bg-primary{
+    background-color: var(--primary-purple);
+}
+
+.black{
+    color: rgb(29, 29, 29);
+}
+
+.register-btn:hover{
+    background-color: var(--primary-purple);
+    color: var(--white);
+}
+
+.login-btn:hover{
+    background-color: var(--secondary-purple);
+}

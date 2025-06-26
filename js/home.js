@@ -23,3 +23,14 @@ window.addEventListener('DOMContentLoaded', function(){
     window.location.href = '/login.html'; // optional
     }
 })
+
+// logout
+document.querySelector('#logout-btn').addEventListener('click', function(e){
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    if (token)  {
+        localStorage.removeItem('token')
+        window.location.href = '/login.html'
+    }
+    
+})

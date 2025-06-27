@@ -5,7 +5,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  fetch('https://api-bible-ai.onrender.com/api/v1.0.0/auth/login', {
+  fetch('https://bible-ai-rnlc.onrender.com/api/v1.0.0/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -19,6 +19,9 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         window.location.href = '/home.html';
         alert("Login successful.")
         localStorage.setItem('token', data.user.access);
+        localStorage.setItem('username', data.user.name);
+        localStorage.setItem('email', data.user.email);
+        localStorage.setItem('profile_url', data.user.profile_picture);
         console.log(data)
     }else{
         throw new Error(data.message || 'Login failed');
@@ -34,4 +37,5 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     alert(`Login failed: ${error.message}`);
   });
 });
+
 

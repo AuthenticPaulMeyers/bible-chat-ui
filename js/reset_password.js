@@ -48,7 +48,7 @@ document.getElementById('resetForm').addEventListener('submit', async function(e
 
   //Send new password to the backend
   try {
-    const response = await fetch(`https://api-bible-ai.onrender.com/api/v1.0.0/auth/reset-password/${token}`, {
+    const response = await fetch(`https://bible-ai-rnlc.onrender.com/api/v1.0.0/auth/reset-password/${token}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

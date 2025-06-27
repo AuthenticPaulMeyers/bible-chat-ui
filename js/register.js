@@ -9,7 +9,7 @@ function registerUser(username, email, password, imageFile) {
         formData.append('image', imageFile)
     }
     
-    fetch('https://api-bible-ai.onrender.com/api/v1.0.0/auth/register', { 
+    fetch('https://bible-ai-rnlc.onrender.com/api/v1.0.0/auth/register', { 
         method: 'POST',
         body: formData
     })
@@ -20,6 +20,8 @@ function registerUser(username, email, password, imageFile) {
         }
         console.log("Registered:", result);
         alert("Registration successful!");
+        // redirect the user to login
+        window.location.href='/login.html'
     })
     .catch(error => {
         console.error('Error:', error.message);

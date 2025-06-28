@@ -49,15 +49,19 @@ async function getCharacter(){
                 }
             });
         }
-        if (!response.ok) {
-            throw new Error(results.message || 'Failed to get characters');
+         if (!response.ok) {
+            const errorData = await response.json()
+            throw new Error(errorData.message || 'Failed to get messages');
         }
         
         // Work with the fetched data here (result)
         // Note that the fetched data returns a character lists of dictionaries
         // to access the data in the loop through the list to get each dictionary
 
+        let results = await response.json()
+
         let characters = results.characters
+        
         // add new datas
         if (characters.length > 0){
 
@@ -90,9 +94,7 @@ listCharactersHTML.addEventListener('click', (event) => {
     }
 })
 
-
-
-window.addEventListener('load', function(e){
+window.addEventListener('DOMCOntentLoaded', function(e){
     e.preventDefault()
     getCharacter()
 })

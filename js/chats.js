@@ -5,7 +5,7 @@
     // Only display the assistant message served from the backend - done
     // Load the user message by default in the front end - done
     // clear the message input when the send button is pressed - done
-    // disable the send button when the input field is empty
+    // disable the send button when the input field is empty 
     // display the current response fron the model to the frontend 
     // attach time and day (Format: Thur, 02 June 2025 - 05:02 AM) to messages converted with js time library
     // Refine the model to generate responses in plain text without any styles. - done
@@ -19,6 +19,7 @@ const BASE_URL = 'https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters' // b
 let listMessagesHTML = document.querySelector('#messages-container')
 const sendButton = document.querySelector('#send-button')
 const messageInput = document.querySelector('#user-message')
+const clearChatButton = document.querySelector('#clear-chat-button')
 
 // redirect the user if they are not logged in
 if(!token){
@@ -47,9 +48,9 @@ async function startChat(){
     // display the message to chat
     addMessageToChat(userMessage, 'user')
     messageInput.value = '' // clear the input field
-    console.log(active_character_id)
+
     try {
-        const res = await fetch(`${BASE_URL}/${active_character_id}/chat`, { 
+        const res = await fetch(`https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/${active_character_id}/chat`, { 
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -60,21 +61,23 @@ async function startChat(){
         if (res.status === 401) {
                 return res.json().then(data => {
                 if (data.msg === "Token has expired" || data.msg === "Invalid token") {
+                    console.log(data.msg)
                     // redirect the user to login
                     window.location.href = '/login.html'
                 }
-                });
+            });
         }
-        if (!res.ok) {
+        else if (!res.ok) {
             const errorData = await res.json()
             throw new Error(errorData.message || 'Failed to get messages');
         }
-            // work with the data here 
-            const data = await res.json();
-            const aiResponse = data.response;
+        // work with the data here 
+        const data = await res.json();
+        const aiResponse = data.response;
 
-            // Display assistant Response
-            addMessageToChat(aiResponse.content, 'assistant');
+        let assistantMessage = aiResponse[aiResponse.length - 1]
+        console.log(assistantMessage)
+        addMessageToChat(assistantMessage.content, aiResponse.role);
 
     } catch (error){
         console.error('Error:', error.message);
@@ -82,7 +85,7 @@ async function startChat(){
         alert(`Error: ${error.message}`);
     }
 }
-
+// get messages to display on the chat page
 async function getMessages(){
     try{
        const res = await fetch(`https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/${active_character_id}/messages`, { 
@@ -121,10 +124,7 @@ async function getMessages(){
     }
 }
 
-sendButton.addEventListener('click', function(e){
-    e.preventDefault()
-    startChat()
-})
+sendButton.addEventListener('click', startChat)
 
 messageInput.addEventListener('keypress', function(e) {
     if (e.key === 'Enter' && !e.shiftKey) { // Shift+Enter for new line
@@ -134,7 +134,58 @@ messageInput.addEventListener('keypress', function(e) {
 });
 
 
-window.addEventListener('load', function(e){
+window.addEventListener('DOMContentLoaded', function(e){
     e.preventDefault()
     getMessages(active_character_id)
+})
+
+// function to clear chat
+async function clearChat(){
+    try{
+        const res = await fetch(`${BASE_URL}/${active_character_id}/chat/clear`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+
+        if (res.status === 401) {
+            return res.json()
+                .then(data => {
+                    if (data.msg === "Token has expired" || data.msg === "Invalid token") {
+                        // redirect the user to login
+                        window.location.href = '/login.html'
+                    }
+            });
+        }
+
+        if (!res.ok) {
+            let errorData = await res.json()
+            throw new Error(errorData.message || 'Failed to get messages');
+        }
+
+        const msg = await res.json()
+        alert(msg.message)
+
+    } catch(error){
+        console.error('Error:', error.message);
+        alert(`Error: ${error.message}`);
+    }
+}
+
+clearChatButton.addEventListener('click', function(e){
+    e.preventDefault()
+    clearChat()
+    getMessages()
+})
+
+
+// if (messageInput.value === ''){
+//     sendButton.style.display = 'none'
+// } 
+
+
+messageInput.addEventListener('input', function(e){
+    e.preventDefault()
+    sendButton.disabled = messageInput.value.trim() === "";
 })

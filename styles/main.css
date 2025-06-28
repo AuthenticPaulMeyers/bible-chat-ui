@@ -1,6 +1,12 @@
+/* google font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* default colors */
 *{
     transition: .25s all;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
 }
 :root{
     --primary-purple: #6f47e4;
@@ -33,11 +39,19 @@
     color: rgb(29, 29, 29);
 }
 
+.bg-black{
+    background-color: rgb(29, 29, 29)
+}
+
 .register-btn:hover{
     background-color: var(--primary-purple);
     color: var(--white);
 }
 
 .login-btn:hover{
+    background-color: var(--secondary-purple);
+}
+
+.bg-secondary{
     background-color: var(--secondary-purple);
 }

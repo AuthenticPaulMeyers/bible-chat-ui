@@ -1,55 +1,140 @@
-const token = localStorage.getItem('token');
-function startChat(character_id, message){
-        fetch(`https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/${character_id}/chat`, { 
-        method: 'POST',
-        headers: {
-            'Authorization': 'Bearer ' + token,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ 'content': message })
-    })
-    .then(async (res) => {
-        const results = await res.json().catch(() => ({}));
-        if (!res.ok) {
-            throw new Error(results.message || 'Failed to get messages');
-        }
-                // work with the data here 
-        let listMessagesHTML = document.querySelector('#messages-container')
-        let messages = results.response
-
-        messages.forEach(message => {
-            let messageCard = document.createElement('div');
-            messageCard.dataset.id = message.id;
-            messageCard.innerHTML = `
-                <p>${message.content}</p>
-                <span>${message.role}</span>
-        `;
-        listMessagesHTML.appendChild(messageCard);
-            
-        });
-    })
-
     // TODO:
-    // Serve the conversation history in a separate route(filterBy characterId and userId)
-    // fetch the {character_id}/messages route
-    // Auto load the messages when the Dom content is loaded in the character chat window
-    // Only display the assistant message served from the backend
-    // Load the user message by default in the front end
-    // clear the message input when the send button is pressed
+    // Serve the conversation history in a separate route(filterBy characterId and userId) - done
+    // fetch the {character_id}/messages route - done
+    // Auto load the messages when the Dom content is loaded in the character chat window - done
+    // Only display the assistant message served from the backend - done
+    // Load the user message by default in the front end - done
+    // clear the message input when the send button is pressed - done
     // disable the send button when the input field is empty
-    // display the current response fron the model to the frontend
-    // Refine the model to generate responses in plain text without any styles.
+    // display the current response fron the model to the frontend 
+    // attach time and day (Format: Thur, 02 June 2025 - 05:02 AM) to messages converted with js time library
+    // Refine the model to generate responses in plain text without any styles. - done
+    // Modify token expiration time when the user logs in
 
-    .catch(error => {
-        console.error('Error:', error.message);
-        alert(`Error: ${error.message}`);
-    });
+const token = localStorage.getItem('token');
+const active_character_id = localStorage.getItem('activeCharacterID')
+const BASE_URL = 'https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters' // base api url
+
+// Get DOM Elements
+let listMessagesHTML = document.querySelector('#messages-container')
+const sendButton = document.querySelector('#send-button')
+const messageInput = document.querySelector('#user-message')
+
+// redirect the user if they are not logged in
+if(!token){
+    window.location.href = '/login.html'
+}
+// Function to add a message to the chat history
+function addMessageToChat(message, senderType) {
+    const messageBubble = document.createElement('pre');
+    messageBubble.classList.add('message-bubble');
+    messageBubble.classList.add(`${senderType}-message`);
+    messageBubble.textContent = message;
+    listMessagesHTML.appendChild(messageBubble);
+
+    // Scroll to the bottom of the chat history
+    listMessagesHTML.scrollTop = listMessagesHTML.scrollHeight;
 }
 
-let active_character_id = localStorage.getItem('activeCharacterID')
+async function startChat(){
+    const userMessage = messageInput.value.trim()
 
-document.querySelector('#send-button').addEventListener('click', function(e){
-    let userMessage = document.querySelector('#user-message').value
+    if (userMessage === ''){
+        alert('Empty message field');
+        return
+    }
+
+    // display the message to chat
+    addMessageToChat(userMessage, 'user')
+    messageInput.value = '' // clear the input field
+    console.log(active_character_id)
+    try {
+        const res = await fetch(`${BASE_URL}/${active_character_id}/chat`, { 
+            method: 'POST',
+            headers: {
+                'Authorization': 'Bearer ' + token,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 'content': userMessage })
+        })
+        if (res.status === 401) {
+                return res.json().then(data => {
+                if (data.msg === "Token has expired" || data.msg === "Invalid token") {
+                    // redirect the user to login
+                    window.location.href = '/login.html'
+                }
+                });
+        }
+        if (!res.ok) {
+            const errorData = await res.json()
+            throw new Error(errorData.message || 'Failed to get messages');
+        }
+            // work with the data here 
+            const data = await res.json();
+            const aiResponse = data.response;
+
+            // Display assistant Response
+            addMessageToChat(aiResponse.content, 'assistant');
+
+    } catch (error){
+        console.error('Error:', error.message);
+        addMessageToChat(`Error: ${error.message}`, 'error-message');
+        alert(`Error: ${error.message}`);
+    }
+}
+
+async function getMessages(){
+    try{
+       const res = await fetch(`https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/${active_character_id}/messages`, { 
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        if (res.status === 401) {
+            return res.json()
+                .then(data => {
+                    if (data.msg === "Token has expired" || data.msg === "Invalid token") {
+                        // redirect the user to login
+                        window.location.href = '/login.html'
+                        console.log(data.msg)
+                    }
+            });
+        }
+
+        if (!res.ok) {
+            let errorData = await res.json()
+            throw new Error(errorData.message || 'Failed to get messages');
+        }
+
+        let resultsData = await res.json()
+
+        let chatHistory = resultsData.response
+        listMessagesHTML.innerHTML = ''
+        chatHistory.forEach(item => {
+            addMessageToChat(item.content, item.role)
+        });
+
+    } catch (error) {
+        console.error('Error:', error.message);
+        alert(`Error: ${error.message}`);
+    }
+}
+
+sendButton.addEventListener('click', function(e){
     e.preventDefault()
-    startChat(active_character_id, userMessage)
+    startChat()
+})
+
+messageInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { // Shift+Enter for new line
+        e.preventDefault(); // Prevent default Enter key behavior (new line)
+        startChat();
+    }
+});
+
+
+window.addEventListener('load', function(e){
+    e.preventDefault()
+    getMessages(active_character_id)
 })

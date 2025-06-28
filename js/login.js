@@ -16,19 +16,18 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const data = await response.json();
 
     if (response.ok) {
-        window.location.href = '/home.html';
-        alert("Login successful.")
         localStorage.setItem('token', data.user.access);
         localStorage.setItem('username', data.user.name);
         localStorage.setItem('email', data.user.email);
         localStorage.setItem('profile_url', data.user.profile_picture);
         console.log(data)
+        // window.location.href = '/home.html';
+
     }else{
         throw new Error(data.message || 'Login failed');
     }
 
     //Store JWT in localStorage (or cookie if needed)
-
     //Redirect to homepage
     
   })
@@ -37,5 +36,3 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     alert(`Login failed: ${error.message}`);
   });
 });
-
-

@@ -3,7 +3,7 @@
 
 /* default colors */
 *{
-    transition: .25s all;
+    /* transition: .25s all; */
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -55,3 +55,4 @@
 .bg-secondary{
     background-color: var(--secondary-purple);
 }
+

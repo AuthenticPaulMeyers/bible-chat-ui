@@ -3,6 +3,8 @@ let listCharactersHTML = document.querySelector('.display-characters-container')
 
 const username = localStorage.getItem('username')
 const token = localStorage.getItem('token');
+const user_email = localStorage.getItem('email')
+const user_profile = localStorage.getItem('profile_url')
 
 const BASE_URL = 'https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters'
 
@@ -14,7 +16,9 @@ if(!token){
 // display user profile on the home page
 window.addEventListener('DOMContentLoaded', function(){
 
-    document.getElementById('welcomeUser').textContent = `Welcome, ${username}`;
+    document.getElementById('welcomeUser').textContent = username;
+    this.document.getElementById('user-profile').src = user_profile;
+    this.document.getElementById('user-name').textContent = username;
 
 })
 
@@ -34,12 +38,14 @@ document.querySelector('#logout-btn').addEventListener('click', function(e){
 async function getCharacter(){
 
     try{
-        const response = await fetch(`${BASE_URL}/get-all`, { 
+        const response = await fetch('https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/get-all', { 
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
-            }
+            },
+            credentials: 'include'
         })
+
 
         if (response.status === 401) {
             return response.json().then(data => {
@@ -61,6 +67,8 @@ async function getCharacter(){
         let results = await response.json()
 
         let characters = results.characters
+
+        console.log(results)
         
         // add new datas
         if (characters.length > 0){
@@ -68,11 +76,22 @@ async function getCharacter(){
             characters.forEach(character => {
                 let newCharacter = document.createElement('div');
                 newCharacter.dataset.id = character.id;
+                newCharacter.classList.add('flex')
+                newCharacter.classList.add('flex-col')
+                newCharacter.classList.add('items-center')
+                newCharacter.classList.add('bg-primary')
+                newCharacter.classList.add('rounded-lg')
+                newCharacter.classList.add('shadow')
+                newCharacter.classList.add('sm:flex')
                 newCharacter.innerHTML = `
-                    <img src="${character.profile_image_url}" height="200px" alt="Character profile Image">
-                    <h3>${character.name}</h3>
-                    <span>${character.book}</span>
-                    <button class="start-chat">Message</button>
+                    <div class="h-24 bg-secondary">
+                        <img src="${character.profile_image_url} " height="50%" class="w-full sm:rounded sm:rounded-lg shrink-0" alt="Character profile Image">
+                    </div>
+                    <div class="flex flex-wrap align-center m-2">
+                        <span class="text-md font-bold white">${character.name} | </span> 
+                        <span class="text-md white px-1">${character.book}</span>
+                    </div>
+                    <button class="start-chat inline-flex justify-center items-center m-1 py-1 px-5 text-base font-sm primary rounded-lg bg-white">Chat <i class="mx-1 fa-regular fa-comment"></i></button>
             `;
             listCharactersHTML.appendChild(newCharacter);
                 
@@ -94,7 +113,7 @@ listCharactersHTML.addEventListener('click', (event) => {
     }
 })
 
-window.addEventListener('DOMCOntentLoaded', function(e){
+window.addEventListener('DOMContentLoaded', function(e){
     e.preventDefault()
     getCharacter()
 })

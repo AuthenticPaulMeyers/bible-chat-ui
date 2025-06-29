@@ -3,16 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Flowbite -->
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+    <!-- Tailwind cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Biblia AI</title>
 </head>
-<body>
-    <span id="welcomeUser"></span>
-    <div></div>
-    <p><button id="logout-btn">Logout</button></p>
-    <div class="display-characters-container">
+<body class="bg-white">
+    <section class="px-4 mx-auto max-w-screen-xl lg:px-12">
+        <nav class="fixed w-full z-20 top-0 start-0 px-4 lg:px-12 bg-white">
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4 align-center">
+                <div>
+                    <a href="/home.html" class="inline-flex justify-between rounded-full items-center py-1 px-1 text-lg bg-primary">
+                    <span class="text-lg text-bold rounded-full white px-4 py-1">Biblia AI 📖</span>
+                    </a>
+                </div>
+                <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <button type="button" class="flex text-sm bg-primary rounded-full md:me-0" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 rounded-full" id="user-profile" alt="user photo">
+                    </button>
+                <!-- Dropdown menu -->
+                    <div class="z-50 hidden my-4 text-base list-none bg-primary divide-y divide-gray-100 rounded-lg shadow-sm" id="user-dropdown">
+                        <div class="px-4 py-3">
+                            <span class="block text-sm text-white" id="user-name"></span>
+                            </div>
+                            <ul>
+                                <li>
+                                <a href="#" class="block px-4 py-2 text-sm text-white rounded-lg" id="logout-btn">Log Out</a>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="mt-20 py-10">
+            <div class="mb-8">
+                <h1 class="primary text-3xl font-extrabold md:text-3xl lg:text-4xl">Welcome, <span id="welcomeUser"></span> </h1>
+                <p class="text-lg font-normal primary lg:text-xl">Who would you like to chat with today?</p>
 
-    </div>
+            </div>
+            
+            <form class="max-w-md mx-auto mb-10 max-w-screen-xl">   
+                <div class="relative">
+                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                        </svg>
+                    </div>
+                    <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:secondary" placeholder="Search Characters..." required />
+                    <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-primary font-medium rounded-lg text-sm px-4 py-2">Search</button>
+                </div>
+            </form>
+
+
+
+
+            <div class="display-characters-container grid gap-4 mb-6 lg:mb-16 md:grid-cols-4 ">
+
+            </div>
+        </div>
+    </section>
     
+    <script src="js/home.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
-<script src="js/home.js" defer type="module"></script>
 </html>
+
+
+
+
+

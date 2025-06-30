@@ -84,9 +84,11 @@ async function startChat(){
         addMessageToChat(cleanedAssistantMessage, aiResponse.role);
 
     } catch (error){
-        console.error('Error:', error.message);
-        addMessageToChat(`Error: ${error.message}`, 'error-message');
-        alert(`Error: ${error.message}`);
+        
+        if(error.message){
+            console.error('Error:', error.message);
+            addMessageToChat('Error: Request failed due to server failure. Please try again later.');
+        }
     }
 }
 // get messages to display on the chat page
@@ -123,8 +125,10 @@ async function getMessages(){
         });
 
     } catch (error) {
-        console.error('Error:', error.message);
-        alert(`Error: ${error.message}`);
+        if(error.message){
+            console.error('Error:', error.message);
+            addMessageToChat('Error: Request failed due to server failure. Please try again later.');
+        }
     }
 }
 

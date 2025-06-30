@@ -25,14 +25,15 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         window.location.href = '/home.html';
 
     }else{
-        throw new Error(data.message || 'Login failed');
+        if(new Error(data.message)){
+          alert("Internal Server failure our team is currently working on it")
+        };
     }
 
-
-    
   })
   .catch(error => {
-    console.error('Login error:', error.message);
-    alert(`Login failed: ${error.message}`);
+    if(error.message){
+        alert("Error: Request failed due to server failure. Our team is currently working on it. Please, Try again later.")
+    }
   });
 });

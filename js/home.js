@@ -3,6 +3,10 @@
 // TODO: 
 // 1. Implement a loader when the chat button is clicked
 // 
+
+// Global array to store fecthed characters
+let allCharacters = []
+
 let listCharactersHTML = document.querySelector('.display-characters-container')
 
 const username = localStorage.getItem('username')
@@ -34,7 +38,7 @@ document.querySelector('#logout-btn').addEventListener('click', function(e){
         localStorage.removeItem('username')
         localStorage.removeItem('email')
         localStorage.removeItem('profile_picture')
-        window.location.href = '/login.html'
+        window.location.href = '/index.html'
     }
 })
 
@@ -73,6 +77,8 @@ async function getCharacter(){
         let characters = results.characters
 
         console.log(characters)
+
+        allCharacters = characters
         
         // add new datas
         if (characters.length > 0){
@@ -107,9 +113,17 @@ async function getCharacter(){
 listCharactersHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
     if(positionClick.classList.contains('start-chat')){
-        let id_character = positionClick.parentElement.dataset.id;
-        window.location.href='/chat.html'
+        let id_character = Number(positionClick.parentElement.dataset.id);
+
         localStorage.setItem('activeCharacterID', id_character)
+        window.location.href = '/chat.html'
+
+        allCharacters.forEach(character => {
+            if (id_character === character.id){
+                localStorage.setItem('activeCharacterName', character.name)
+                localStorage.setItem('activeCharacterProfile', character.profile_image_url)
+            }
+        }) 
     }
 })
 

@@ -13,6 +13,13 @@
     --secondary-purple: #9e75ff;
     --white: #fafafa;
     --shadows: #ecebfb;
+    --color1: #161719;
+    --color2: #26272b;
+    --text: #5c5c5c;
+    --highlight1: #56b273;
+    --highlight2: #b388dd;
+    --highlight3: #ff8750;
+    --highlight4: #01AD9B;
 
 }
 
@@ -118,7 +125,87 @@
     height: 100vh;
 }
 
+.message-bubble{
+    border-radius: 30px;
+    background-color: var(--shadows);
+    color: var(--text);
+    font-size: 0.7em;
+    line-height: 1;
+    padding: 15px 25px;
+    margin-bottom: 40px;
+    position: relative;
+    word-wrap: break-word;
+    width: 50%;
+    white-space: pre-wrap;
 
+}
+
+.user-message {
+  border-right: 4px solid;
+  border-left: 4px solid;
+  border-color: var(--highlight2);
+  align-self: flex-start;
+  margin-left: auto;
+}
+
+.assistant-message{
+  border-right: 4px solid;
+  border-left: 4px solid;
+  border-color: var(--highlight1);
+  align-self: flex-end;
+  margin-right: auto;
+}
+
+.messages-container{
+    max-width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-container{
+    background-color: var(--shadows);
+    width: 100%;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input-container > input{
+    background: none;
+    outline: 0;
+    border: 0;
+    font-size: 12px;
+    width: 90%;
+
+}
+
+input:focus{
+    outline: 0;
+    border: 0;
+}
+
+#send-button{
+    margin-right: 10px;
+    line-height: 10px;
+    padding: 10px;
+    height: 35px;
+    width: 35px;
+    color: var(--white);
+    background-color: var(--secondary-purple);
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+}
+
+#send-button:hover{
+    background-color: var(--primary-purple);
+}
+
+
+/* mediaqueries */
 @media only screen and (max-width: 600px) {
     .card-details{
     width: 100%;
@@ -131,4 +218,17 @@
 .login-background-image{
     height: 100vh;
 }
+.message-bubble{
+    font-size: 0.6em;
+    line-height: 1;
+    padding: 10px 15px;
+    margin-bottom: 40px;
+    position: relative;
+    word-wrap: break-word;
+    width: 65%;
+    white-space: pre-wrap;
+
+}
+
+
 }

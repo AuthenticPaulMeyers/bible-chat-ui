@@ -24,13 +24,22 @@ const sendButton = document.querySelector('#send-button')
 const messageInput = document.querySelector('#user-message')
 const clearChatButton = document.querySelector('#clear-chat-button')
 
+// get the character details
+const activeCharacterName = localStorage.getItem('activeCharacterName')
+const activeCharacterProfile = localStorage.getItem('activeCharacterProfile')
+
+messageInput.addEventListener('input', function(e){
+    e.preventDefault()
+        sendButton.style.display = 'block' 
+})
+
 // redirect the user if they are not logged in
 if(!token){
     window.location.href = '/login.html'
 }
 // Function to add a message to the chat history
 function addMessageToChat(message, senderType) {
-    const messageBubble = document.createElement('pre');
+    const messageBubble = document.createElement('div');
     messageBubble.classList.add('message-bubble');
     messageBubble.classList.add(`${senderType}-message`);
     messageBubble.textContent = message;
@@ -79,9 +88,9 @@ async function startChat(){
         const aiResponse = data.response;
 
         let assistantMessage = aiResponse[aiResponse.length - 1]
-        console.log(assistantMessage)
-        let cleanedAssistantMessage = assistantMessage.content.replace(/[\*$!@\\]/g);
-        addMessageToChat(cleanedAssistantMessage, aiResponse.role);
+        
+        let cleanedAssistantMessage = assistantMessage.content
+        addMessageToChat(cleanedAssistantMessage, 'assistant');
 
     } catch (error){
         
@@ -123,6 +132,13 @@ async function getMessages(){
         chatHistory.forEach(item => {
             addMessageToChat(item.content, item.role)
         });
+
+        let characterProfileEl = document.querySelector('#character-chat-profile')
+
+        characterProfileEl.src = activeCharacterProfile;
+
+        let characterNameEl = document.querySelector('#character-name')
+        characterNameEl.textContent = activeCharacterName;
 
     } catch (error) {
         if(error.message){
@@ -187,13 +203,14 @@ clearChatButton.addEventListener('click', function(e){
     getMessages()
 })
 
-
-// if (messageInput.value === ''){
-//     sendButton.style.display = 'none'
-// } 
-
-
-messageInput.addEventListener('input', function(e){
-    e.preventDefault()
-    sendButton.disabled = messageInput.value.trim() === "";
+// logout
+document.querySelector('#logout-btn').addEventListener('click', function(e){
+    e.preventDefault();
+    if (token)  {
+        localStorage.removeItem('token')
+        localStorage.removeItem('username')
+        localStorage.removeItem('email')
+        localStorage.removeItem('profile_picture')
+        window.location.href = '/index.html'
+    }
 })

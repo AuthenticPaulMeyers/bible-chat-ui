@@ -26,13 +26,13 @@
                     <img class="w-8 h-8 rounded-full" id="user-profile" alt="user photo">
                     </button>
                 <!-- Dropdown menu -->
-                    <div class="z-50 hidden my-4 text-base list-none bg-primary divide-y divide-gray-100 rounded-lg shadow-sm" id="user-dropdown">
+                    <div class="z-50 hidden text-base my-8 list-none bg-primary divide-y divide-gray-100 rounded-lg shadow-sm" id="user-dropdown">
                         <div class="px-4 py-3">
                             <span class="block text-sm text-white" id="user-name"></span>
-                            </div>
+                        </div>
                             <ul>
                                 <li>
-                                <a href="#" class="block px-4 py-2 text-sm text-white rounded-lg" id="logout-btn">Log Out</a>
+                                <a class=" cursor-pointer block px-4 py-2 text-sm text-white rounded-lg" id="logout-btn">Log Out</a>
                                 </li>
                             </ul>
                     </div>
@@ -57,14 +57,17 @@
                     <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-primary font-medium rounded-lg text-sm px-4 py-2">Search</button>
                 </div>
             </form>
-
-
-
-
-            <div class="display-characters-container grid gap-4 mb-6 lg:mb-16 md:grid-cols-4 ">
+            <div class="display-characters-container grid grid-cols-1 md:grid-cols-4 gap-4 ">
 
             </div>
         </div>
+    </section>
+
+
+    <!-- Footer -->
+     <section class="py-1 px-4 mx-auto max-w-screen-xl text-center lg:py-1 lg:px-1">
+        <hr class="my-2 border-gray-400 sm:mx-auto lg:my-8" />
+            <span class="block text-sm text-gray-400 text-center">© 2025 Biblia AI™ - v1.0.0</a>. <br> All Rights Reserved.</span> <br>
     </section>
     
     <script src="js/home.js" defer></script>

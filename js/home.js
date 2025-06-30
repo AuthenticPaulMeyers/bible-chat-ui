@@ -1,4 +1,8 @@
 // a container to display all the characters when loaded
+
+// TODO: 
+// 1. Implement a loader when the chat button is clicked
+// 
 let listCharactersHTML = document.querySelector('.display-characters-container')
 
 const username = localStorage.getItem('username')
@@ -68,30 +72,26 @@ async function getCharacter(){
 
         let characters = results.characters
 
-        console.log(results)
+        console.log(characters)
         
         // add new datas
         if (characters.length > 0){
 
             characters.forEach(character => {
                 let newCharacter = document.createElement('div');
-                newCharacter.dataset.id = character.id;
-                newCharacter.classList.add('flex')
-                newCharacter.classList.add('flex-col')
-                newCharacter.classList.add('items-center')
-                newCharacter.classList.add('bg-primary')
-                newCharacter.classList.add('rounded-lg')
-                newCharacter.classList.add('shadow')
-                newCharacter.classList.add('sm:flex')
                 newCharacter.innerHTML = `
-                    <div class="h-24 bg-secondary">
-                        <img src="${character.profile_image_url} " height="50%" class="w-full sm:rounded sm:rounded-lg shrink-0" alt="Character profile Image">
+                    <div class="character-card">
+                        <div class="image-container">
+                            <img src="${character.profile_image_url} "h-auto max-w-full rounded-lg" alt="Character profile Image">
+                        </div>
+                        <div class="card-details" data-id="${character.id}">
+                            <div class="m-1">
+                                <span class="font-bold white">${character.name} <br> </span> 
+                                <span class="book-name white">${character.book}</span>
+                            </div>
+                                <button class="start-chat inline-flex justify-center items-center py-1 px-5 text-base font-sm primary rounded-lg bg-white cursor-pointer">Chat <i class="mx-1 fa-regular fa-comment"></i></button>
+                        </div>
                     </div>
-                    <div class="flex flex-wrap align-center m-2">
-                        <span class="text-md font-bold white">${character.name} | </span> 
-                        <span class="text-md white px-1">${character.book}</span>
-                    </div>
-                    <button class="start-chat inline-flex justify-center items-center m-1 py-1 px-5 text-base font-sm primary rounded-lg bg-white">Chat <i class="mx-1 fa-regular fa-comment"></i></button>
             `;
             listCharactersHTML.appendChild(newCharacter);
                 

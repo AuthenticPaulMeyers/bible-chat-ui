@@ -11,6 +11,9 @@
     // Refine the model to generate responses in plain text without any styles. - done
     // Modify token expiration time when the user logs in
 
+
+    // Show typing animation as the assitant is thinking
+
 const token = localStorage.getItem('token');
 const active_character_id = localStorage.getItem('activeCharacterID')
 const BASE_URL = 'https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters' // base api url
@@ -77,7 +80,8 @@ async function startChat(){
 
         let assistantMessage = aiResponse[aiResponse.length - 1]
         console.log(assistantMessage)
-        addMessageToChat(assistantMessage.content, aiResponse.role);
+        let cleanedAssistantMessage = assistantMessage.content.replace(/[\*$!@\\]/g);
+        addMessageToChat(cleanedAssistantMessage, aiResponse.role);
 
     } catch (error){
         console.error('Error:', error.message);

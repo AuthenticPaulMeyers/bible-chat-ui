@@ -100,7 +100,7 @@ async function getCharacter(){
             `;
             listCharactersHTML.appendChild(newCharacter);
 
-            return {name: character.name, element: newCharacter}
+            return {name: character.name, element: newCharacter, book: character.book}
                 
             });
         }
@@ -142,7 +142,8 @@ searchInput.addEventListener('input', (e) => {
     const value = searchInput.value.toLowerCase()
 
     allCharactersSearch.forEach(character =>{
-        const isVisible = character.name.toLowerCase().includes(value)
-        character.element.classList.toggle('hide', !isVisible)
+        const isVisible = character.name.toLowerCase().includes(value) || character.book.toLowerCase().includes(value)
+            character.element.classList.toggle('hide', !isVisible)
+            // document.querySelector('#search-result-message').style.display('block')
     })
 })

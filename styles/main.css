@@ -1,7 +1,5 @@
 /* TODO:
     Implement a loader function on login start chat, register, clear chat, ai typing reponse
-
-
 */
 
 
@@ -10,7 +8,7 @@
 
 /* default colors */
 *{
-    /* transition: .25s all; */
+    transition: .25s all;
     font-family: "Montserrat", sans-serif;
     font-optical-sizing: auto;
     font-style: normal;
@@ -82,8 +80,7 @@
 .character-card{
     height: 230px;
     position: relative;
-    border-radius: 50px;
-    
+    border-radius: 10px;    
 
 }
 
@@ -91,8 +88,8 @@
     height: 100%;
     object-fit: cover;
     overflow: hidden;
+    border-radius: 10px;    
 
-    
 }
 
 .card-details{

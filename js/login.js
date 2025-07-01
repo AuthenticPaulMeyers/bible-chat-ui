@@ -33,7 +33,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   })
   .catch(error => {
     if(error.message){
-        alert("Error: Request failed due to server failure. Our team is currently working on it. Please, Try again later.")
+        alert(error.message)
     }
   });
 });

@@ -5,11 +5,11 @@
     // Only display the assistant message served from the backend - done
     // Load the user message by default in the front end - done
     // clear the message input when the send button is pressed - done
-    // disable the send button when the input field is empty 
-    // display the current response fron the model to the frontend 
+    // disable the send button when the input field is empty - done
+    // display the current response fron the model to the frontend - done
     // attach time and day (Format: Thur, 02 June 2025 - 05:02 AM) to messages converted with js time library
     // Refine the model to generate responses in plain text without any styles. - done
-    // Modify token expiration time when the user logs in
+    // Modify token expiration time when the user logs in - done
 
 
     // Show typing animation as the assitant is thinking
@@ -212,5 +212,20 @@ document.querySelector('#logout-btn').addEventListener('click', function(e){
         localStorage.removeItem('email')
         localStorage.removeItem('profile_picture')
         window.location.href = '/index.html'
+        localStorage.removeItem('activeCharacterName')
+        localStorage.removeItem('activeCharacterProfile')
+        localStorage.removeItem('activeCharacterID')
     }
+})
+
+
+// remove current user from the localstorage when the chat is closed
+document.querySelector('#close-chat-button').addEventListener('click', function(e){
+    e.preventDefault()
+    localStorage.removeItem('activeCharacterName')
+    localStorage.removeItem('activeCharacterProfile')
+    localStorage.removeItem('activeCharacterID')
+
+    window.location.href = '/home.html'
+
 })

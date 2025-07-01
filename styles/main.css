@@ -1,3 +1,10 @@
+/* TODO:
+    Implement a loader function on login start chat, register, clear chat, ai typing reponse
+
+
+*/
+
+
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -182,9 +189,7 @@
 
 }
 
-input:focus{
-    outline: none;
-    border: none;
+input:focus{    
     box-shadow: none;
 }
 
@@ -204,6 +209,22 @@ input:focus{
 #send-button:hover{
     background-color: var(--primary-purple);
 }
+
+#close-chat-button{
+    margin: 0 15px;
+    color: var(--primary-purple);
+    cursor: pointer;
+}
+
+.chat-title-container{
+    display: flex;
+    align-items: center;
+}
+
+.hide{
+    display: none;
+}
+
 
 
 /* mediaqueries */
@@ -230,6 +251,7 @@ input:focus{
     white-space: pre-wrap;
 
 }
+
 
 
 }

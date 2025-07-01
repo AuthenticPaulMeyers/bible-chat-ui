@@ -6,6 +6,7 @@
 
 // Global array to store fecthed characters
 let allCharacters = []
+let allCharactersSearch = []
 
 let listCharactersHTML = document.querySelector('.display-characters-container')
 
@@ -76,14 +77,12 @@ async function getCharacter(){
 
         let characters = results.characters
 
-        console.log(characters)
-
         allCharacters = characters
         
         // add new datas
         if (characters.length > 0){
 
-            characters.forEach(character => {
+            allCharactersSearch = characters.map(character => {
                 let newCharacter = document.createElement('div');
                 newCharacter.innerHTML = `
                     <div class="character-card">
@@ -100,6 +99,8 @@ async function getCharacter(){
                     </div>
             `;
             listCharactersHTML.appendChild(newCharacter);
+
+            return {name: character.name, element: newCharacter}
                 
             });
         }
@@ -130,4 +131,18 @@ listCharactersHTML.addEventListener('click', (event) => {
 window.addEventListener('DOMContentLoaded', function(e){
     e.preventDefault()
     getCharacter()
+})
+
+// search characters in the home page
+const searchButton = document.querySelector('#search-button')
+const searchInput = document.querySelector('#default-search')
+
+searchInput.addEventListener('input', (e) => {
+    e.preventDefault()
+    const value = searchInput.value.toLowerCase()
+
+    allCharactersSearch.forEach(character =>{
+        const isVisible = character.name.toLowerCase().includes(value)
+        character.element.classList.toggle('hide', !isVisible)
+    })
 })

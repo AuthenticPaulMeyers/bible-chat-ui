@@ -133,7 +133,7 @@
     border-radius: 30px;
     background-color: var(--shadows);
     color: var(--text);
-    font-size: 0.7em;
+    font-size: 0.9em;
     line-height: 1;
     padding: 15px 25px;
     margin-bottom: 40px;
@@ -145,16 +145,16 @@
 }
 
 .user-message {
-  border-right: 4px solid;
-  border-left: 4px solid;
+  border-right: 3px solid;
+  border-left: 3px solid;
   border-color: var(--highlight2);
   align-self: flex-start;
   margin-left: auto;
 }
 
 .assistant-message{
-  border-right: 4px solid;
-  border-left: 4px solid;
+  border-right: 3px solid;
+  border-left: 3px solid;
   border-color: var(--highlight1);
   align-self: flex-end;
   margin-right: auto;
@@ -181,7 +181,7 @@
     background: none;
     outline: 0;
     border: 0;
-    font-size: 12px;
+    font-size: 0.9em;
     width: 90%;
 
 }

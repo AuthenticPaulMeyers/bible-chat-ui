@@ -22,9 +22,9 @@ if(!token){
 // display user profile on the home page
 window.addEventListener('DOMContentLoaded', function(){
 
-    document.getElementById('welcomeUser').textContent = username.capitalize();
+    document.getElementById('welcomeUser').textContent = username;
     this.document.getElementById('user-profile').src = user_profile;
-    this.document.getElementById('user-name').textContent = username.capitalize();
+    this.document.getElementById('user-name').textContent = username;
 
 })
 

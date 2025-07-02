@@ -1,4 +1,3 @@
-// a container to display all the characters when loaded
 
 // TODO: 
 // 1. Implement a loader when the chat button is clicked
@@ -15,8 +14,6 @@ const token = localStorage.getItem('token');
 const user_email = localStorage.getItem('email')
 const user_profile = localStorage.getItem('profile_url')
 
-const BASE_URL = 'https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters'
-
 // redirect users to login
 if(!token){
     window.location.href = '/login.html'
@@ -25,9 +22,9 @@ if(!token){
 // display user profile on the home page
 window.addEventListener('DOMContentLoaded', function(){
 
-    document.getElementById('welcomeUser').textContent = username;
+    document.getElementById('welcomeUser').textContent = username.capitalize();
     this.document.getElementById('user-profile').src = user_profile;
-    this.document.getElementById('user-name').textContent = username;
+    this.document.getElementById('user-name').textContent = username.capitalize();
 
 })
 
@@ -47,7 +44,7 @@ document.querySelector('#logout-btn').addEventListener('click', function(e){
 async function getCharacter(){
 
     try{
-        const response = await fetch('https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/get-all', { 
+        const response = await fetch('https://bible-ai-chat.onrender.com/api/v1.0.0/characters/get-all', { 
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token
@@ -66,12 +63,12 @@ async function getCharacter(){
         }
          if (!response.ok) {
             const errorData = await response.json()
-            throw new Error(errorData.message || 'Failed to get messages');
+            throw new Error(errorData.message);
         }
         
         // Work with the fetched data here (result)
         // Note that the fetched data returns a character lists of dictionaries
-        // to access the data in the loop through the list to get each dictionary
+        // to access the data, loop through the list to get each dictionary
 
         let results = await response.json()
 

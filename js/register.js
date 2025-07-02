@@ -9,7 +9,7 @@ function registerUser(username, email, password, imageFile) {
         formData.append('image', imageFile)
     }
     
-    fetch('https://bible-ai-rnlc.onrender.com/api/v1.0.0/auth/register', { 
+    fetch('https://bible-ai-chat.onrender.com/api/v1.0.0/auth/register', { 
         method: 'POST',
         body: formData
     })

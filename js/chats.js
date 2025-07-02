@@ -16,7 +16,7 @@
 
 const token = localStorage.getItem('token');
 const active_character_id = localStorage.getItem('activeCharacterID')
-const BASE_URL = 'https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters' // base api url
+const BASE_URL = 'https://bible-ai-chat.onrender.com/api/v1.0.0/characters' // base api url
 
 // Get DOM Elements
 let listMessagesHTML = document.querySelector('#messages-container')
@@ -62,7 +62,7 @@ async function startChat(){
     messageInput.value = '' // clear the input field
 
     try {
-        const res = await fetch(`https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/${active_character_id}/chat`, { 
+        const res = await fetch(`${BASE_URL}/${active_character_id}/chat`, { 
             method: 'POST',
             headers: {
                 'Authorization': 'Bearer ' + token,
@@ -103,7 +103,7 @@ async function startChat(){
 // get messages to display on the chat page
 async function getMessages(){
     try{
-       const res = await fetch(`https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/${active_character_id}/messages`, { 
+       const res = await fetch(`${BASE_URL}/${active_character_id}/messages`, { 
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token

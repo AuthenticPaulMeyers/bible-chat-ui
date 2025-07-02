@@ -5,7 +5,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
-  fetch('https://bible-ai-rnlc.onrender.com/api/v1.0.0/auth/login', {
+  fetch('https://bible-ai-chat.onrender.com/api/v1.0.0/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

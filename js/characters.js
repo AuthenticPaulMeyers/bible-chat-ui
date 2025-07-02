@@ -15,7 +15,7 @@ function addCharacter(name, description, book, imageFile) {
     for (let [key, value] of formData.entries()) {
         console.log(`${key}:`, value);
     }
-    fetch('https://bible-ai-rnlc.onrender.com/api/v1.0.0/characters/add', { 
+    fetch('https://bible-ai-chat.onrender.com/api/v1.0.0/characters/add', { 
         method: 'POST',
         headers: {
             'Authorization': 'Bearer ' + token

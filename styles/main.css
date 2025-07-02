@@ -238,15 +238,14 @@ input:focus{
     height: 100vh;
 }
 .message-bubble{
-    font-size: 0.6em;
+    font-size: 1em;
     line-height: 1;
     padding: 10px 15px;
-    margin-bottom: 40px;
+    margin-bottom: 15px;
     position: relative;
     word-wrap: break-word;
     width: 65%;
     white-space: pre-wrap;
-
 }
 
 

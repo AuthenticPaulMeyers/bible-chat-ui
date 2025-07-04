@@ -1,3 +1,7 @@
+const loaderEl = document.querySelector('.loader');
+const registerButtonEl = document.querySelector('#register-button');
+const registerTextEl = document.querySelector('.register-text');
+
 // Register users route
 function registerUser(username, email, password, imageFile) {
     const formData = new FormData;
@@ -20,8 +24,14 @@ function registerUser(username, email, password, imageFile) {
         }
         console.log("Registered:", result);
         alert("Registration successful!");
+        // enable the button and disable the loader
+        loaderEl.style.display = 'none';
+        registerButtonEl.disabled = false;
+        registerTextEl.style.display = 'inline-block';
+        
         // redirect the user to login
         window.location.href='/login.html'
+
     })
     .catch(error => {
         console.error('Error:', error.message);
@@ -32,6 +42,16 @@ function registerUser(username, email, password, imageFile) {
 // get values from the
 document.getElementById('registerForm').addEventListener('submit', function(event) {
   event.preventDefault(); // prevent form submission reload
+
+// disable the button and enable the loader
+  loaderEl.style.display = 'inline-block';
+  registerButtonEl.disabled = true;
+
+  if(registerButtonEl.disabled === true){
+    registerButtonEl.style.background = 'gray';
+    registerTextEl.style.display = 'none';
+  }
+
 
   const username = document.getElementById('username').value;
   const email = document.getElementById('email').value;

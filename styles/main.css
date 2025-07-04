@@ -139,7 +139,6 @@
     margin-bottom: 40px;
     position: relative;
     word-wrap: break-word;
-    width: 50%;
     white-space: pre-wrap;
 
 }
@@ -150,6 +149,7 @@
   border-color: var(--highlight2);
   align-self: flex-start;
   margin-left: auto;
+  width: auto;
 }
 
 .assistant-message{
@@ -158,6 +158,8 @@
   border-color: var(--highlight1);
   align-self: flex-end;
   margin-right: auto;
+  width: 50%;
+
 }
 
 .messages-container{
@@ -221,6 +223,52 @@ input:focus{
 .hide{
     display: none;
 }
+
+/* spinner loader*/
+.loader {
+  width: 15px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  animation:
+    l20-1 0.8s infinite linear alternate,
+    l20-2 1.6s infinite linear;
+  display: none;
+}
+@keyframes l20-1{
+   0%    {clip-path: polygon(50% 50%,0       0,  50%   0%,  50%    0%, 50%    0%, 50%    0%, 50%    0% )}
+   12.5% {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100%   0%, 100%   0%, 100%   0% )}
+   25%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 100% 100%, 100% 100% )}
+   50%   {clip-path: polygon(50% 50%,0       0,  50%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+   62.5% {clip-path: polygon(50% 50%,100%    0, 100%   0%,  100%   0%, 100% 100%, 50%  100%, 0%   100% )}
+   75%   {clip-path: polygon(50% 50%,100% 100%, 100% 100%,  100% 100%, 100% 100%, 50%  100%, 0%   100% )}
+   100%  {clip-path: polygon(50% 50%,50%  100%,  50% 100%,   50% 100%,  50% 100%, 50%  100%, 0%   100% )}
+}
+@keyframes l20-2{ 
+  0%    {transform:scaleY(1)  rotate(0deg)}
+  49.99%{transform:scaleY(1)  rotate(135deg)}
+  50%   {transform:scaleY(-1) rotate(0deg)}
+  100%  {transform:scaleY(-1) rotate(-135deg)}
+}
+
+
+/* typing loader */
+.texting-loader {
+  width: 5px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  animation: l5 1s infinite linear alternate;
+}
+@keyframes l5 {
+    0%  {box-shadow: 20px 0 #000, -20px 0 #0002;background: #000 }
+    33% {box-shadow: 20px 0 #000, -20px 0 #0002;background: #0002}
+    66% {box-shadow: 20px 0 #0002,-20px 0 #000; background: #0002}
+    100%{box-shadow: 20px 0 #0002,-20px 0 #000; background: #000 }
+}
+
+
+
+
 
 
 

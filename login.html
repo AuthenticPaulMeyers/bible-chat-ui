@@ -14,9 +14,8 @@
     <title>Biblia - Login</title>
 </head>
 <body class="bg-white">
-
   <div class="login-background-image">
-      <section class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-12">
+    <section class="py-16 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
     <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen">
         <a href="/index.html" class="inline-flex justify-between rounded-full items-center py-1 px-1 mb-7 text-lg bg-primary">
             <span class="text-lg text-bold rounded-full white px-4 py-1">Biblia AI 📖</span>
@@ -37,10 +36,14 @@
                         <button type="button" class=" text-gray-500 font-md absolute right-2 top-10 cursor-pointer" id="toggle-show-password"><i class="fa-solid fa-eye"></i></button>
                     </div>
 
-                    <button type="submit" class="w-full text-white bg-gray-900 cursor-pointer hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Login</button>
+                    <button type="submit" class="w-full text-white bg-gray-900 cursor-pointer hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" id="login-button">
+                        <div class="loader"></div>
+                        <span class="login-text">Login</span>
+                    </button>
                     <p class=" mt-2 text-sm font-light white dark:text-gray-400">
                         New user? <a href="/register.html" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Create account here.</a>
                     </p>
+                
                     <!-- <p class="mt-2 text-sm font-light white dark:text-gray-400"><a href="reset-password.html">Forgot password?</a></p> -->
                 </form>
             </div>

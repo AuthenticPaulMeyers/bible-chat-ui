@@ -40,3 +40,24 @@ document.getElementById('registerForm').addEventListener('submit', function(even
 
   registerUser(username, email, password, image);
 });
+
+// toggle show password
+const togglePassword = document.querySelector('#toggle-show-password')
+
+togglePassword.addEventListener('click', function(e){
+
+  e.preventDefault()
+
+  const passwordInput = document.querySelector('#password')
+
+  if (passwordInput.type === 'password'){
+    passwordInput.type = 'text';
+    document.querySelector('#toggle-show-password i').classList.remove('fa-eye')
+    document.querySelector('#toggle-show-password i').classList.add('fa-eye-slash')
+
+  }else{
+    passwordInput.type = 'password';
+    document.querySelector('#toggle-show-password i').classList.remove('fa-eye-slash')
+    document.querySelector('#toggle-show-password i').classList.add('fa-eye')
+  }
+})

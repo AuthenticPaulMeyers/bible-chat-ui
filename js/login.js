@@ -14,6 +14,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   })
   .then(async response => {
     const data = await response.json();
+    console.log(data)
 
     if (response.ok) {
           //Store token in localStorage
@@ -22,7 +23,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         localStorage.setItem('username', data.user.name);
         localStorage.setItem('email', data.user.email);
         localStorage.setItem('profile_url', data.user.profile_picture);
-        window.location.href = '/home.html';
+        // window.location.href = '/home.html';
 
     }else{
         if(new Error(data.message)){
@@ -37,3 +38,24 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     }
   });
 });
+
+// toggle show password
+const togglePassword = document.querySelector('#toggle-show-password')
+
+togglePassword.addEventListener('click', function(e){
+
+  e.preventDefault()
+
+  const passwordInput = document.querySelector('#password')
+
+  if (passwordInput.type === 'password'){
+    passwordInput.type = 'text';
+    document.querySelector('#toggle-show-password i').classList.remove('fa-eye')
+    document.querySelector('#toggle-show-password i').classList.add('fa-eye-slash')
+
+  }else{
+    passwordInput.type = 'password';
+    document.querySelector('#toggle-show-password i').classList.remove('fa-eye-slash')
+    document.querySelector('#toggle-show-password i').classList.add('fa-eye')
+  }
+})

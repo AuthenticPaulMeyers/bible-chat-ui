@@ -331,7 +331,7 @@ input:focus{
 }
 
 .login-background-image{
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .9)), url('/images/login.jpg');
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0.9)), url('/images/login.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     object-fit: cover;
@@ -340,7 +340,7 @@ input:focus{
 }
 
 .register-background-image{
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .9)), url('/images/register.jpg');
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0.9)), url('/images/register.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     object-fit: cover;

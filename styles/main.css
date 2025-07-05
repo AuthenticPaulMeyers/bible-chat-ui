@@ -225,7 +225,7 @@ input:focus{
     align-items: center;
 }
 
-.hide, .login-error-text{
+.hide, .login-error-text, .register-error-text{
     display: none;
 }
 

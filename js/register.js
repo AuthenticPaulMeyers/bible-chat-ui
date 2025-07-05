@@ -19,9 +19,19 @@ function registerUser(username, email, password, imageFile) {
     })
         .then(async (response) => {
             const result = await response.json().catch(() => ({}));
-            if (!response.ok) {
-                throw new Error(result.message || 'Registration failed');
-            }
+            if(response.satus === 400 || response.status === 409 || !response.ok){
+                      // display login error message
+                const registrationError = result.error
+                console.log(registrationError)
+                const registrationErrorEl = document.querySelector('.register-error-text')
+                registrationErrorEl.style.display = 'block';
+                registrationErrorEl.innerHTML = registrationError
+                      // enable the button and disable the loader
+                loaderEl.style.display = 'none';
+                registerButtonEl.style.background = '#101828';
+                registerButtonEl.disabled = false;
+                registerTextEl.style.display = 'inline-block';
+            }else{
                 console.log("Registered:", result);
                 alert("Registration successful!");
                 // enable the button and disable the loader
@@ -32,6 +42,8 @@ function registerUser(username, email, password, imageFile) {
                 
                 // redirect the user to login
                 window.location.href='/login.html'
+            }
+                
     })
     .catch(error => {
         console.error('Error:', error.message);
@@ -51,7 +63,6 @@ document.getElementById('registerForm').addEventListener('submit', function(even
     registerButtonEl.style.background = '#1a202c';
     registerTextEl.style.display = 'none';
   }
-
 
   const username = document.getElementById('username').value;
   const email = document.getElementById('email').value;

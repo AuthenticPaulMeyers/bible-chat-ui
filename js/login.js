@@ -12,13 +12,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   // disable the button and enable the loader
   loaderEl.style.display = 'inline-block';
   loginButtonEl.disabled = true;
-
-  if(loginButtonEl.disabled === true){
-    loginButtonEl.style.background = 'gray';
-    loginTextEl.style.display = 'none';
-  }
-
-
+  loginButtonEl.style.background = '#1a202c';
+  loginTextEl.style.display = 'none';
 
   fetch('https://bible-ai-chat.onrender.com/api/v1.0.0/auth/login', {
     method: 'POST',
@@ -30,6 +25,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   .then(async response => {
     const data = await response.json();
     if(response.status === 400){
+      // display login error message
       const loginError = data.error
       const loginErrorEl = document.querySelector('.login-error-text')
       loginErrorEl.style.display = 'block';

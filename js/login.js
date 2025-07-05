@@ -30,8 +30,15 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   .then(async response => {
     const data = await response.json();
     if(response.status === 400){
-      document.querySelector('.login-error-text').style.display = 'block';
-      console.log(data.error)
+      const loginError = data.error
+      const loginErrorEl = document.querySelector('.login-error-text')
+      loginErrorEl.style.display = 'block';
+      loginErrorEl.innerHTML = loginError
+      // enable the button and disable the loader
+      loaderEl.style.display = 'none';
+      loginButtonEl.style.background = '#101828';
+      loginButtonEl.disabled = false;
+      loginTextEl.style.display = 'inline-block';
 
     }
   
@@ -44,23 +51,17 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         localStorage.setItem('profile_url', data.user.profile_picture);
         // enable the button and disable the loader
         loaderEl.style.display = 'none';
-        loginButtonEl.style.background = '#6f47e4';
+        loginButtonEl.style.background = '#101828';
         loginButtonEl.disabled = false;
         loginTextEl.style.display = 'inline-block';
         // redirect the user to the home page
         window.location.href = '/home.html';
 
-    }else{
-        if(new Error(data.message)){
-          // alert("Login failed. Please try again later.")
-          console.log(data.message)
-        };
     }
 
   })
   .catch(error => {
     if(error.message){
-        // alert("Login failed. Please try again later.")
         console.log(error.message)
     }
   });

@@ -18,21 +18,20 @@ function registerUser(username, email, password, imageFile) {
         body: formData
     })
         .then(async (response) => {
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) {
-        throw new Error(result.message || 'Registration failed');
-        }
-        console.log("Registered:", result);
-        alert("Registration successful!");
-        // enable the button and disable the loader
-        loaderEl.style.display = 'none';
-        registerButtonEl.style.background = '#6f47e4';
-        registerButtonEl.disabled = false;
-        registerTextEl.style.display = 'inline-block';
-        
-        // redirect the user to login
-        window.location.href='/login.html'
-
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok) {
+                throw new Error(result.message || 'Registration failed');
+            }
+                console.log("Registered:", result);
+                alert("Registration successful!");
+                // enable the button and disable the loader
+                loaderEl.style.display = 'none';
+                registerButtonEl.style.background = '#1a202c';
+                registerButtonEl.disabled = false;
+                registerTextEl.style.display = 'inline-block';
+                
+                // redirect the user to login
+                window.location.href='/login.html'
     })
     .catch(error => {
         console.error('Error:', error.message);
@@ -49,7 +48,7 @@ document.getElementById('registerForm').addEventListener('submit', function(even
   registerButtonEl.disabled = true;
 
   if(registerButtonEl.disabled === true){
-    registerButtonEl.style.background = 'gray';
+    registerButtonEl.style.background = '#1a202c';
     registerTextEl.style.display = 'none';
   }
 

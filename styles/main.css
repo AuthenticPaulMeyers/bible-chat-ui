@@ -224,6 +224,7 @@ input:focus{
     display: none;
 }
 
+
 /* spinner loader*/
 .loader {
   width: 15px;
@@ -294,6 +295,23 @@ input:focus{
     word-wrap: break-word;
     width: 65%;
     white-space: pre-wrap;
+}
+.login-background-image{
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .9)), url('/images/login.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    object-position: center;
+    height: 100vh;
+}
+
+.register-background-image{
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, .7), rgba(0, 0, 0, .9)), url('/images/register.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    object-fit: cover;
+    object-position: center;
+    height: 100vh;
 }
 
 

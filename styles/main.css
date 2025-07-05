@@ -232,7 +232,7 @@ input:focus{
 
 /* spinner loader*/
 .loader {
-  width: 15px;
+  width: 10px;
   aspect-ratio: 1;
   border-radius: 50%;
   border: 2px solid var(--white);

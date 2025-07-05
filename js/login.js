@@ -30,7 +30,8 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   .then(async response => {
     const data = await response.json();
     if(response.status === 400){
-      console.log('wrong username or password')
+      document.querySelector('.login-error-text').style.display = 'block';
+
     }
   
     if (response.ok) {

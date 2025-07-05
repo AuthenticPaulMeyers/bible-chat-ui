@@ -53,18 +53,22 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:secondary" placeholder="Search Characters, Books..." required />
+                    <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:secondary" placeholder="Search Characters..." required />
                 </div>
             </form>
             <span class="search-result-message text-sm mx-auto primary" style="display: none;">No results found.</span>
+            <!-- characters container -->
             <div class="display-characters-container grid grid-cols-1 md:grid-cols-4 gap-4 ">
+                <div class="flex justify-center">
+                    <div class="spinning-loader"></div>
+                </div>
             </div>
         </div>
     </section>
     <!-- Footer -->
      <section class="py-1 px-4 mx-auto max-w-screen-xl text-center lg:py-1 lg:px-1">
         <hr class="my-2 border-gray-400 sm:mx-auto lg:my-8" />
-            <span class="block text-sm text-gray-400 text-center">© 2025 Biblia AI™ - v1.0.0</a>. <br> All Rights Reserved.</span> <br>
+            <span class="block text-sm text-gray-400 text-center">© 2025 Biblia AI™ - v1.0.0</a> <br> All Rights Reserved.</span> <br>
     </section>
     
     <script src="js/home.js" defer></script>

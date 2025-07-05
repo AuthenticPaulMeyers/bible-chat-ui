@@ -23,6 +23,8 @@ let listMessagesHTML = document.querySelector('#messages-container')
 const sendButton = document.querySelector('#send-button')
 const messageInput = document.querySelector('#user-message')
 const clearChatButton = document.querySelector('#clear-chat-button')
+const loaderEl = document.querySelector('.loader')
+const clearTextEl = document.querySelector('.clear-text')
 
 // get the character details
 const activeCharacterName = localStorage.getItem('activeCharacterName')
@@ -61,6 +63,12 @@ async function startChat(){
     addMessageToChat(userMessage, 'user')
     messageInput.value = '' // clear the input field
 
+    // show the loader for assistant typing once the user message is sent
+    const typingLoaderEl = document.createElement('div')
+    typingLoaderEl.classList.add('texting-loader', 'loader-container')
+    listMessagesHTML.appendChild(typingLoaderEl)
+    listMessagesHTML.scrollTop = listMessagesHTML.scrollHeight;
+
     try {
         const res = await fetch(`${BASE_URL}/${active_character_id}/chat`, { 
             method: 'POST',
@@ -90,16 +98,33 @@ async function startChat(){
         let assistantMessage = aiResponse[aiResponse.length - 1]
         
         let cleanedAssistantMessage = assistantMessage.content
+        // remove the loader once the message is added to chat
+        typingLoaderEl.remove()
+        // add assistant response to chat
         addMessageToChat(cleanedAssistantMessage, 'assistant');
+        listMessagesHTML.scrollTop = listMessagesHTML.scrollHeight;
+
 
     } catch (error){
-        
         if(error.message){
             console.error('Error:', error.message);
+            // remove the loader once the error is generated
+            typingLoaderEl.remove()
+
+            // add the error response to chat
             addMessageToChat('Error: Request failed due to server failure. Please try again later.');
         }
     }
 }
+
+// load character profile
+let characterProfileEl = document.querySelector('#character-chat-profile')
+
+characterProfileEl.src = activeCharacterProfile;
+
+let characterNameEl = document.querySelector('#character-name')
+characterNameEl.textContent = activeCharacterName;
+
 // get messages to display on the chat page
 async function getMessages(){
     try{
@@ -132,13 +157,6 @@ async function getMessages(){
         chatHistory.forEach(item => {
             addMessageToChat(item.content, item.role)
         });
-
-        let characterProfileEl = document.querySelector('#character-chat-profile')
-
-        characterProfileEl.src = activeCharacterProfile;
-
-        let characterNameEl = document.querySelector('#character-name')
-        characterNameEl.textContent = activeCharacterName;
 
     } catch (error) {
         if(error.message){
@@ -190,17 +208,22 @@ async function clearChat(){
 
         const msg = await res.json()
         alert(msg.message)
+        loaderEl.style.display = 'none'
+        clearTextEl.style.display = 'block'
 
     } catch(error){
         console.error('Error:', error.message);
         alert(`Error: ${error.message}`);
     }
 }
-
+// clear chat on button click
 clearChatButton.addEventListener('click', function(e){
     e.preventDefault()
     clearChat()
     getMessages()
+
+    loaderEl.style.display = 'block'
+    clearTextEl.style.display = 'none'
 })
 
 // logout

@@ -78,7 +78,7 @@ async function getCharacter(){
         
         // add new datas
         if (characters.length > 0){
-
+            listCharactersHTML.innerHTML = ''
             allCharactersSearch = characters.map(character => {
                 let newCharacter = document.createElement('div');
                 newCharacter.innerHTML = `

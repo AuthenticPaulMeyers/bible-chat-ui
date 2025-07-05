@@ -29,6 +29,9 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   })
   .then(async response => {
     const data = await response.json();
+    if(response.status === 400){
+      console.log('wrong username or password')
+    }
   
     if (response.ok) {
           //Store token in localStorage
@@ -44,7 +47,6 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         loginTextEl.style.display = 'inline-block';
         // redirect the user to the home page
         window.location.href = '/home.html';
-        console.log(data)
 
     }else{
         if(new Error(data.message)){

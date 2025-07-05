@@ -29,7 +29,6 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   })
   .then(async response => {
     const data = await response.json();
-    console.log(data)
   
     if (response.ok) {
           //Store token in localStorage
@@ -40,24 +39,25 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         localStorage.setItem('profile_url', data.user.profile_picture);
         // enable the button and disable the loader
         loaderEl.style.display = 'none';
+        loginButtonEl.style.background = '#6f47e4';
         loginButtonEl.disabled = false;
         loginTextEl.style.display = 'inline-block';
         // redirect the user to the home page
         window.location.href = '/home.html';
-
-
-
+        console.log(data)
 
     }else{
         if(new Error(data.message)){
-          alert("Internal Server failure our team is currently working on it")
+          // alert("Login failed. Please try again later.")
+          console.log(data.message)
         };
     }
 
   })
   .catch(error => {
     if(error.message){
-        alert(error.message)
+        // alert("Login failed. Please try again later.")
+        console.log(error.message)
     }
   });
 });

@@ -26,6 +26,7 @@ function registerUser(username, email, password, imageFile) {
         alert("Registration successful!");
         // enable the button and disable the loader
         loaderEl.style.display = 'none';
+        registerButtonEl.style.background = '#6f47e4';
         registerButtonEl.disabled = false;
         registerTextEl.style.display = 'inline-block';
         

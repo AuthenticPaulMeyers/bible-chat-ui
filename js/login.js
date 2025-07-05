@@ -31,7 +31,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const data = await response.json();
     if(response.status === 400){
       document.querySelector('.login-error-text').style.display = 'block';
-      console.log(data)
+      console.log(data.error)
 
     }
   

@@ -63,12 +63,13 @@ async function startChat(){
     addMessageToChat(userMessage, 'user')
     messageInput.value = '' // clear the input field
 
-    // show the loader for assistant typing once the user message is sent
-    const typingLoaderEl = document.createElement('div')
-    typingLoaderEl.classList.add('texting-loader', 'loader-container')
-    listMessagesHTML.appendChild(typingLoaderEl)
-    listMessagesHTML.scrollTop = listMessagesHTML.scrollHeight;
-
+    setTimeout(() =>{
+            // show the loader for assistant typing once the user message is sent
+        const typingLoaderEl = document.createElement('div')
+        typingLoaderEl.classList.add('texting-loader', 'loader-container')
+        listMessagesHTML.appendChild(typingLoaderEl)
+        listMessagesHTML.scrollTop = listMessagesHTML.scrollHeight;  
+    }, 3000);
     try {
         const res = await fetch(`${BASE_URL}/${active_character_id}/chat`, { 
             method: 'POST',
@@ -87,9 +88,12 @@ async function startChat(){
                 }
             });
         }
-        else if (!res.ok) {
+        if (!res.ok) {
             const errorData = await res.json()
             throw new Error(errorData.message || 'Failed to get messages');
+        }
+        if(res.status === 429){
+            addMessageToChat('You have reached your limit of messages per hour. Please try again later.', 'error');
         }
         // work with the data here 
         const data = await res.json();
@@ -110,9 +114,8 @@ async function startChat(){
             console.error('Error:', error.message);
             // remove the loader once the error is generated
             typingLoaderEl.remove()
-
             // add the error response to chat
-            addMessageToChat('Error: Request failed due to server failure. Please try again later.');
+            addMessageToChat('Error: Request failed due to server failure. Please try again later.', 'error');
         }
     }
 }
@@ -161,7 +164,7 @@ async function getMessages(){
     } catch (error) {
         if(error.message){
             console.error('Error:', error.message);
-            addMessageToChat('Error: Request failed due to server failure. Please try again later.');
+            addMessageToChat('Error: Request failed due to server failure. Please try again later.', 'error');
         }
     }
 }

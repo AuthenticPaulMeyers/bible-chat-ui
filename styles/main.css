@@ -167,6 +167,16 @@
 
 }
 
+.error-message{
+  border-right: 3px solid;
+  border-left: 3px solid;
+  border-color: rgb(170, 0, 0);
+  color: rgb(170, 0, 0);
+  align-self: flex-end;
+  margin-right: auto;
+  width: 50%;
+
+}
 .messages-container{
     max-width: 90%;
     margin: 0 auto;
@@ -285,7 +295,7 @@ input:focus{
 
 /* typing loader */
 .texting-loader {
-  width: 10px;
+  width: 8px;
   aspect-ratio: 1;
   border-radius: 50%;
   align-self: flex-end;

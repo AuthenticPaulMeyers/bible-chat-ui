@@ -163,7 +163,7 @@
   border-color: var(--highlight1);
   align-self: flex-end;
   margin-right: auto;
-  width: 50%;
+  width: 55%;
 
 }
 
@@ -242,7 +242,7 @@ input:focus{
 
 /* spinner loader*/
 .loader {
-  width: 10px;
+  width: 8px;
   aspect-ratio: 1;
   border-radius: 50%;
   border: 2px solid var(--white);
@@ -332,7 +332,7 @@ input:focus{
     margin-bottom: 15px;
     position: relative;
     word-wrap: break-word;
-    width: 65%;
+    width: 67%;
     white-space: pre-wrap;
 }
 .user-message{

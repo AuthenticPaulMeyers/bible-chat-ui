@@ -44,7 +44,7 @@ document.querySelector('#logout-btn').addEventListener('click', function(e){
 async function getCharacter(){
 
     try{
-        const response = await fetch('https://bible-ai-chat.onrender.com/api/v1.0.0/characters/get-all', { 
+        const response = await fetch('https://bible-ai-chat.onrender.com/api/v1.0.0/characters/all', { 
             method: 'GET',
             headers: {
                 'Authorization': 'Bearer ' + token

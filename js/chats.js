@@ -63,13 +63,13 @@ async function startChat(){
     addMessageToChat(userMessage, 'user')
     messageInput.value = '' // clear the input field
 
+    const typingLoaderEl = document.createElement('div')
     setTimeout(() =>{
-            // show the loader for assistant typing once the user message is sent
-        const typingLoaderEl = document.createElement('div')
+        // show the loader for assistant typing once the user message is sent
         typingLoaderEl.classList.add('texting-loader', 'loader-container')
         listMessagesHTML.appendChild(typingLoaderEl)
         listMessagesHTML.scrollTop = listMessagesHTML.scrollHeight;  
-    }, 3000);
+    }, 2000);
     try {
         const res = await fetch(`${BASE_URL}/${active_character_id}/chat`, { 
             method: 'POST',
